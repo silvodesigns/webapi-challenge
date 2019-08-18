@@ -13,51 +13,19 @@ I need this code, just don't know where, perhaps should make some middleware, do
 Go code!
 */
 
-const express = require("express");
+const server = require("./server.js")
 
-const projects = require('./data/helpers/projectModel.js');
-
-const server = express();
-
-server.use(express.json());
 
 server.get('/',(req,res)=>{
     res.send("Hello from Express");
 
 });
 
-server.get('/projects',(req,res)=>{
-   projects.get()
-   .then(response => {
-    res.status(200).json(response);
-   })
-   .catch(err=>{
-       res.status(400).json({message: err})
-   })
-
-});
-
-server.get('/projects/:id',(req,res)=>{
-    const { id } = req.params;
-    projects.get(id)
-    .then(response => {
-        if(response){
-            res.status(200).json(response);
-         } else {b
-             res.status(404).json({
-                 message: "The project with the specified ID does not exist"
-             })
-         }
-    })
-    .catch(err=>{
-        res.status(400).json({message: err})
-    })
- 
- });
- 
-
-
 
 server.listen(4000,()=>{
     console.log('Server is listening on http://localhost:4000');
 });
+
+
+
+module.exports = server;
