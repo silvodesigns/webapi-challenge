@@ -16,16 +16,9 @@ Go code!
 const server = require("./server.js")
 
 
-server.get('/',(req,res)=>{
-    res.send("Hello from Express");
-
-});
-
-
 server.listen(4000,()=>{
     console.log('Server is listening on http://localhost:4000');
 });
 
 
 
-module.exports = server;
