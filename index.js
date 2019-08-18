@@ -12,3 +12,27 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+const express = require("express");
+
+const projects = require('./data/helpers/projectModel.js');
+
+const server = express();
+
+server.use(express.json());
+
+server.get('/',(req,res)=>{
+    res.send("Hello from Express");
+
+});
+
+server.get('/projects',(req,res)=>{
+   projects.get()
+   .then(response => {
+    res.status(200).json(response);
+   })
+   .catch(err=>{
+       res.status(400).json({message: err})
+   })
+
+});
