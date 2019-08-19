@@ -188,7 +188,7 @@ router.get('/',(req,res)=>{
     const { id } = req.params;
     const changes = req.body;
   
-    actions.delete(id)
+    actions.remove(id)
     .then(response => {
         if(id){
         res.status(200).json(response);

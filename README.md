@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+`Express in a node dependecy that it easier and faster to set up in order to perform CRUD operations following RESTful standards. You can install it using npm install express and then import it into your project by requiring it`
+
 - [ ] Describe Middleware?
+
+`A middleware is basically a function that takes the data sent before it reaches its destinations and then does something to it before passsing it along`
 
 - [ ] Describe a Resource?
 
+`A resource is the databases that you have available to work on withing an appliation`
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+`We can return headers with different status code and as well as personalized messages created with loggers`
+
 - [ ] How can we partition our application into sub-applications?
+
+`using mini serversd with routers`
 
 ## Project Setup
 
