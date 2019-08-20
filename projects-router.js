@@ -129,26 +129,25 @@ router.get('/',(req,res)=>{
  
  });
 
+///////////////////////actions operations
 
- router.post('/actions/:id',(req,res)=>{
 
-    const { id } = req.params;
+router.get('/actions/:id',checkProjectsId, (req,res) => {
+
+    actions.get()
+    .then(response => {
+        res.status(200).json(response);
+    })
+    .catch(err=>{
+        res.status(400).json({message: err})
+    })
+ 
+ });
+
+
+ router.post('/actions/:id', checkProjectsId,(req,res)=>{
+
     const newAction = req.body;
-    if(!id){
-        res.status(400).json({message:"The project with this ID dont exist"})
-    }
-    if(!newAction.project_id){
-        res.status(400).json({message:"Please add a project_id property"})
-
-    }
-    if(!newAction.description){
-        res.status(400).json({message:"Please add a description property"})
-
-    }
-    if(!newAction.notes){
-        res.status(400).json({message:"Please add a note property"})
-
-    }
     actions.insert(newAction)
     .then(response => {
       
@@ -161,7 +160,7 @@ router.get('/',(req,res)=>{
  });
 
 
- router.put('/actions/:id',(req,res)=>{
+ router.put('/actions/:id', (req,res)=>{
 
     const { id } = req.params;
     const changes = req.body;
@@ -183,11 +182,10 @@ router.get('/',(req,res)=>{
 
 
 
- router.put('/actions/:id',(req,res)=>{
+ router.delete('/actions/:id',(req,res)=>{
 
     const { id } = req.params;
-    const changes = req.body;
-  
+
     actions.remove(id)
     .then(response => {
         if(id){
@@ -201,6 +199,24 @@ router.get('/',(req,res)=>{
     })
  
  });
+
+ function checkProjectsId(req,res,next){
+     
+     const { id } = req.params;
+     projects.get(id)
+     .then(projects => {
+         if(projects){
+             next()
+         } else {
+             res.status(404).json({message: "We could not find a project with passed ID"})
+         }
+     })
+     .catch(err => {
+        res.status(400).json({message: "Fatal ID Error"});
+     })
+
+
+ }
 
 
 
